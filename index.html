@@ -82,23 +82,27 @@
   <p>Made just for you ❤️</p>
 
   <div class="card">
-    <h2>💌 Ask Me Anything</h2>
+    <h2> Ask Me Anything :heartpulse: </h2>
     <p> </p>
 
     <!-- FORM WILL GO HERE LATER -->
+  <div id="form-wrapper">
   <form id="question-form">
-  <input
-    type="text"
-    name="question"
-    placeholder="Type your question here..."
-    required
-  >
-  <button type="submit">Send 🎁</button>
-</form>
+    <input
+      type="text"
+      name="question"
+      placeholder="Type your question here..."
+      required
+    >
+    <button type="submit">Send 🎁</button>
+  </form>
+</div>
 
-<p id="success-message" style="display:none; margin-top:10px;">
-   sent!! 💌
-</p>
+<div id="sent-wrapper" style="display:none; margin-top:15px;">
+  <p>💌 Sent successfully!</p>
+  <button id="send-again">Send another message</button>
+</div>
+
 
   </div>
 
