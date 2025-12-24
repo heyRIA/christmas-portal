@@ -86,8 +86,16 @@
     <p>Ask Santa (me) anything 🎅</p>
 
     <!-- FORM WILL GO HERE LATER -->
-    <input type="text" placeholder="Type your question here..." disabled>
-    <button disabled>Send 🎁</button>
+   <form action="https://formspree.io/f/mvzpneor" method="POST">
+  <input
+    type="text"
+    name="question"
+    placeholder="Type your question here..."
+    required
+  >
+  <button type="submit">Send 🎁</button>
+</form>
+
   </div>
 
   <footer>
