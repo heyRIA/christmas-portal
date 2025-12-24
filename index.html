@@ -109,29 +109,7 @@
   <footer>
     ❄️ Merry Christmas ❄️
   </footer>
-<script>
-  const form = document.getElementById("question-form");
-  const successMessage = document.getElementById("success-message");
 
-  if (form) {
-    form.addEventListener("submit", async function (e) {
-      e.preventDefault();
-
-      const formData = new FormData(form);
-
-      await fetch("https://formspree.io/f/mvzpneor", {
-        method: "POST",
-        body: formData,
-        headers: {
-          "Accept": "application/json"
-        }
-      });
-
-      form.reset();
-      successMessage.style.display = "block";
-    });
-  }
-</script>
 <script>
   const form = document.getElementById("question-form");
   const formWrapper = document.getElementById("form-wrapper");
@@ -165,7 +143,6 @@
     });
   }
 </script>
-
 
 </body>
 </html>
