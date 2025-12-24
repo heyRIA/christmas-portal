@@ -86,7 +86,7 @@
     <p>Ask Santa (me) anything 🎅</p>
 
     <!-- FORM WILL GO HERE LATER -->
-   <form action="https://formspree.io/f/mvzpneor" method="POST">
+  <form id="question-form">
   <input
     type="text"
     name="question"
@@ -96,11 +96,36 @@
   <button type="submit">Send 🎁</button>
 </form>
 
+<p id="success-message" style="display:none; margin-top:10px;">
+  🎅 Santa received your message 💌
+</p>
+
   </div>
 
   <footer>
     ❄️ Merry Christmas ❄️
   </footer>
+<script>
+  const form = document.getElementById("question-form");
+  const successMessage = document.getElementById("success-message");
+
+  form.addEventListener("submit", async function (e) {
+    e.preventDefault();
+
+    const formData = new FormData(form);
+
+    await fetch("https://formspree.io/f/mvzpneor", {
+      method: "POST",
+      body: formData,
+      headers: {
+        "Accept": "application/json"
+      }
+    });
+
+    form.reset();
+    successMessage.style.display = "block";
+  });
+</script>
 
 </body>
 </html>
