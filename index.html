@@ -59,6 +59,22 @@
     }
   </style>
 </head>
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+<script>
+  function snow() {
+    confetti({
+      particleCount: 2,
+      angle: 90,
+      spread: 360,
+      origin: { x: Math.random(), y: -0.1 },
+      colors: ['#ffffff'],
+      scalar: 0.6
+    });
+  }
+
+  setInterval(snow, 300);
+</script>
 
 <body>
 
