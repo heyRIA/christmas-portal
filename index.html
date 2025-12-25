@@ -57,6 +57,21 @@
       font-size: 0.9rem;
       opacity: 0.7;
     }
+    .new-reply {
+  border: 2px solid #ffb703;
+  box-shadow: 0 0 15px #ffb703;
+  animation: glow 1.5s infinite alternate;
+}
+
+@keyframes glow {
+  from {
+    box-shadow: 0 0 8px #ffb703;
+  }
+  to {
+    box-shadow: 0 0 18px #ffb703;
+  }
+}
+
   </style>
 </head>
 
@@ -148,6 +163,7 @@
 <!-- REPLIES SCRIPT -->
 <script>
   const repliesContainer = document.getElementById("replies");
+  const seenCount = Number(localStorage.getItem("seenReplies") || 0);
 
   fetch("https://script.google.com/macros/s/AKfycbxfk7ei32nlx9Uhe0acYb9UljjionNUuN0XeAEvNsW-B0hcTj9NuWRwo7T56mHRPt0n0w/exec")
     .then(res => res.json())
@@ -159,7 +175,9 @@
         return;
       }
 
-      data.reverse().forEach(item => {
+      const reversed = data.reverse();
+
+      reversed.forEach((item, index) => {
         if (!item.reply) return;
 
         const div = document.createElement("div");
@@ -168,6 +186,10 @@
         div.style.background = "rgba(255,255,255,0.1)";
         div.style.borderRadius = "10px";
 
+        if (index < reversed.length - seenCount) {
+          div.classList.add("new-reply");
+        }
+
         div.innerHTML = `
           <p><strong>💬 You:</strong> ${item.question}</p>
           <p><strong>❤️ Me:</strong> ${item.reply}</p>
@@ -175,11 +197,14 @@
 
         repliesContainer.appendChild(div);
       });
+
+      localStorage.setItem("seenReplies", reversed.length);
     })
     .catch(() => {
       repliesContainer.innerHTML = "<p>Couldn't load replies 😔</p>";
     });
 </script>
+
 
 </body>
 </html>
