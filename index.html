@@ -91,9 +91,15 @@
   }
   setInterval(snow, 300);
 </script>
+<audio id="bg-music" loop>
+  <source src="christmas.mp3" type="audio/mpeg">
+</audio>
 
 <h1>🎄 Welcome to Your Christmas Portal 🎄</h1>
 <p>Made just for you ❤️</p>
+<button id="music-btn" style="margin-top:15px;">
+  🎶 Play Christmas Music
+</button>
 
 <!-- ASK ME ANYTHING -->
 <div class="card">
@@ -205,6 +211,15 @@
     });
 </script>
 
+<script>
+  const music = document.getElementById("bg-music");
+  const musicBtn = document.getElementById("music-btn");
+
+  musicBtn.addEventListener("click", () => {
+    music.play();
+    musicBtn.innerText = "🎄 Music Playing";
+  });
+</script>
 
 </body>
 </html>
