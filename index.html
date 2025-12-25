@@ -76,14 +76,40 @@
   setInterval(snow, 300);
 </script>
 
-<body>
 
   <h1>🎄 Welcome to Your Christmas Portal 🎄</h1>
   <p>Made just for you ❤️</p>
 
   <div class="card">
-    <h2> Ask Me Anything 💗 </h2>
-    <p> </p>
+  <h2> Ask Me Anything 💗 </h2>
+
+  <div id="form-wrapper">
+    <form id="question-form">
+      <input
+        type="text"
+        name="question"
+        placeholder="Type your question here..."
+        required
+      >
+      <button type="submit">Send 🎁</button>
+    </form>
+  </div>
+
+  <div id="sent-wrapper" style="display:none; margin-top:15px;">
+    <p>💌 got it!! you can send as many as you like! </p>
+    <button id="send-again">Send another message</button>
+  </div>
+</div>
+
+  <div class="card">
+  <h2> Replies from Me 💗</h2>
+  <p>Come back here to see my answers 💌</p>
+
+  <div id="replies">
+    <p>Loading replies...</p>
+  </div>
+</div>
+
 
     <!-- FORM WILL GO HERE LATER -->
   <div id="form-wrapper">
@@ -142,6 +168,40 @@
       formWrapper.style.display = "block";
     });
   }
+</script>
+<script>
+  const repliesContainer = document.getElementById("replies");
+
+  fetch("https://script.google.com/macros/s/AKfycbxfk7ei32nlx9Uhe0acYb9UljjionNUuN0XeAEvNsW-B0hcTj9NuWRwo7T56mHRPt0n0w/exec")
+    .then(res => res.json())
+    .then(data => {
+      repliesContainer.innerHTML = "";
+
+      if (!data.length) {
+        repliesContainer.innerHTML = "<p>No replies yet 💭</p>";
+        return;
+      }
+
+      data.reverse().forEach(item => {
+        if (!item.reply) return;
+
+        const div = document.createElement("div");
+        div.style.marginBottom = "12px";
+        div.style.padding = "10px";
+        div.style.background = "rgba(255,255,255,0.1)";
+        div.style.borderRadius = "10px";
+
+        div.innerHTML = `
+          <p><strong>💬 You:</strong> ${item.question}</p>
+          <p><strong>❤️ Me:</strong> ${item.reply}</p>
+        `;
+
+        repliesContainer.appendChild(div);
+      });
+    })
+    .catch(() => {
+      repliesContainer.innerHTML = "<p>Couldn't load replies 😔</p>";
+    });
 </script>
 
 </body>
