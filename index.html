@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
- <body>
-
   <meta charset="UTF-8" />
   <title>🎄 Christmas Portal 🎄</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,7 +8,7 @@
   <style>
     body {
       margin: 0;
-      font-family: 'Arial', sans-serif;
+      font-family: Arial, sans-serif;
       background: linear-gradient(#0b3d2e, #021c14);
       color: white;
       text-align: center;
@@ -61,8 +59,10 @@
     }
   </style>
 </head>
-<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
+<body>
+
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 <script>
   function snow() {
     confetti({
@@ -74,16 +74,15 @@
       scalar: 0.6
     });
   }
-
   setInterval(snow, 300);
 </script>
 
+<h1>🎄 Welcome to Your Christmas Portal 🎄</h1>
+<p>Made just for you ❤️</p>
 
-  <h1>🎄 Welcome to Your Christmas Portal 🎄</h1>
-  <p>Made just for you ❤️</p>
-
-  <div class="card">
-  <h2> Ask Me Anything 💗 </h2>
+<!-- ASK ME ANYTHING -->
+<div class="card">
+  <h2>Ask Me Anything 💗</h2>
 
   <div id="form-wrapper">
     <form id="question-form">
@@ -98,13 +97,14 @@
   </div>
 
   <div id="sent-wrapper" style="display:none; margin-top:15px;">
-    <p>💌 got it!! you can send as many as you like! </p>
+    <p>💌 Got it!! You can send as many as you like!</p>
     <button id="send-again">Send another message</button>
   </div>
 </div>
 
-  <div class="card">
-  <h2> Replies from Me 💗</h2>
+<!-- REPLIES -->
+<div class="card">
+  <h2>Replies from Me 💗</h2>
   <p>Come back here to see my answers 💌</p>
 
   <div id="replies">
@@ -112,59 +112,40 @@
   </div>
 </div>
 
-  <form id="question-form">
-    <input
-      type="text"
-      name="question"
-      placeholder="Type your question here..."
-      required
-    >
-    <button type="submit">Send 🎁</button>
-  </form>
-</div>
+<footer>
+  ❄️ Merry Christmas ❄️
+</footer>
 
-<div id="sent-wrapper" style="display:none; margin-top:15px;">
-  <p>💌 got it!! you can send as many as you like! </p>
-  <button id="send-again">Send another message</button>
-</div>
-
-  <footer>
-    ❄️ Merry Christmas ❄️
-  </footer>
-
+<!-- FORM SCRIPT -->
 <script>
   const form = document.getElementById("question-form");
   const formWrapper = document.getElementById("form-wrapper");
   const sentWrapper = document.getElementById("sent-wrapper");
   const sendAgainBtn = document.getElementById("send-again");
 
-  if (form) {
-    form.addEventListener("submit", async function (e) {
-      e.preventDefault();
+  form.addEventListener("submit", async function (e) {
+    e.preventDefault();
 
-      const formData = new FormData(form);
+    const formData = new FormData(form);
 
-      await fetch("https://formspree.io/f/mvzpneor", {
-        method: "POST",
-        body: formData,
-        headers: {
-          "Accept": "application/json"
-        }
-      });
-
-      form.reset();
-      formWrapper.style.display = "none";
-      sentWrapper.style.display = "block";
+    await fetch("https://formspree.io/f/mvzpneor", {
+      method: "POST",
+      body: formData,
+      headers: { "Accept": "application/json" }
     });
-  }
 
-  if (sendAgainBtn) {
-    sendAgainBtn.addEventListener("click", function () {
-      sentWrapper.style.display = "none";
-      formWrapper.style.display = "block";
-    });
-  }
+    form.reset();
+    formWrapper.style.display = "none";
+    sentWrapper.style.display = "block";
+  });
+
+  sendAgainBtn.addEventListener("click", function () {
+    sentWrapper.style.display = "none";
+    formWrapper.style.display = "block";
+  });
 </script>
+
+<!-- REPLIES SCRIPT -->
 <script>
   const repliesContainer = document.getElementById("replies");
 
