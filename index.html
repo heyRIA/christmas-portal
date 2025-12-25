@@ -225,6 +225,10 @@
 <script>
   const music = document.getElementById("bg-music");
   const musicBtn = document.getElementById("music-btn");
+  const volumeSlider = document.getElementById("volume-slider");
+
+  // default volume
+  music.volume = volumeSlider.value;
 
   musicBtn.addEventListener("click", () => {
     if (music.paused) {
@@ -235,7 +239,12 @@
       musicBtn.innerText = "🎶 Play Music";
     }
   });
+
+  volumeSlider.addEventListener("input", () => {
+    music.volume = volumeSlider.value;
+  });
 </script>
+
 
 
 </body>
