@@ -217,10 +217,16 @@
   const musicBtn = document.getElementById("music-btn");
 
   musicBtn.addEventListener("click", () => {
-    music.play();
-    musicBtn.innerText = "🎄 Music Playing";
+    if (music.paused) {
+      music.play();
+      musicBtn.innerText = "⏸ Pause Music";
+    } else {
+      music.pause();
+      musicBtn.innerText = "🎶 Play Music";
+    }
   });
 </script>
+
 
 </body>
 </html>
